@@ -4,7 +4,6 @@ import { Contract, ethers, Signer } from "ethers";
 import { decrypt, encrypt } from "@metamask/eth-sig-util";
 import { isGeneratorFunction } from "util/types";
 import { poseidon } from "circomlibjs";
-import { throws } from "assert";
 
 //Read credentials counter
 async function readCredentialsCounter(contract: Contract | undefined) {

@@ -12,7 +12,7 @@ import UserVerify from "./components/userverify";
 
 const Home: NextPage = () => {
   //Contracts Constats
-  const CREDENTIALS_DB_ADDRESS = "0x4919A3cD7D5617aB42d2573173C0D032c7035398";
+  const CREDENTIALS_DB_ADDRESS = "0x35CecafF2679f334Fc4ECAbba38EB6e1b499aC49";
 
   //wallet connection
   const [walletAddress, setWalletAddress] = useState("");
@@ -96,7 +96,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        <h3>ZK Verifiable credentials App</h3>
+        <h3>VC0x35CecafF2679f334Fc4ECAbba38EB6e1b499aC49 Auth</h3>
         <div>
           {walletAddress == "" ? (
             <button

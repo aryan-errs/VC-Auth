@@ -221,8 +221,8 @@
       ]
     },
     "/home/aryan/Blockchain/VC-based-Auth/contracts/zkVerifiableCredentialsDBCoreVerifier.sol": {
-      "lastModificationDate": 1743594660986,
-      "contentHash": "ea38ccc816338c8408c7692b13ccf734",
+      "lastModificationDate": 1745171640985,
+      "contentHash": "14fa4e75da90f6f4b63b99b6ba4c12ce",
       "sourceName": "contracts/zkVerifiableCredentialsDBCoreVerifier.sol",
       "solcConfig": {
         "version": "0.8.9",
