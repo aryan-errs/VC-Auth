@@ -96,7 +96,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        <h3>VC0x35CecafF2679f334Fc4ECAbba38EB6e1b499aC49 Auth</h3>
+        <h3>VC Auth</h3>
         <div>
           {walletAddress == "" ? (
             <button
