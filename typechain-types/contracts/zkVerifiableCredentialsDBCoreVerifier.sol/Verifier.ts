@@ -23,7 +23,7 @@ import type {
 
 export interface VerifierInterface extends utils.Interface {
   functions: {
-    "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[12])": FunctionFragment;
+    "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[16])": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "verifyProof"): FunctionFragment;

@@ -1,5 +1,6 @@
 .container {
   padding: 0;
+  background-color: black;
 }
 
 .main {
@@ -9,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .footer {
@@ -27,8 +29,8 @@
   border-bottom: 2px solid #000000;
   align-items: center;
 }
-.header h3{
-  margin: 1rem
+.header h3 {
+  margin: 1rem;
 }
 
 .title {
@@ -37,49 +39,48 @@
   font-size: 4rem;
 }
 
-.conButton{
+.conButton {
   margin: 0.5rem;
   padding: 1rem;
   border: solid;
   border-radius: 30px;
   background-color: rgba(245, 245, 220, 0);
-  width: 9,7rem;
-  max-width: 9,7rem;
-  height: 4,5rem;
-  max-height: 4,5rem;
+  width: 9, 7rem;
+  max-width: 9, 7rem;
+  height: 4, 5rem;
+  max-height: 4, 5rem;
 
-  display:inline-block;
+  display: inline-block;
 }
 
-.conButton:hover{
+.conButton:hover {
   margin: 0.5rem;
   padding: 1rem;
   border: solid;
   border-radius: 30px;
-  width: 9,7rem;
-  max-width: 9,7rem;
-  height: 4,5rem;
-  max-height: 4,5rem;
-  display:inline-block;
+  width: 9, 7rem;
+  max-width: 9, 7rem;
+  height: 4, 5rem;
+  max-height: 4, 5rem;
+  display: inline-block;
   background-color: rgb(212, 182, 72);
 }
 
-.conButtonAddress{
+.conButtonAddress {
   margin: 0.5rem;
   padding: 1rem;
   border: solid;
   border-radius: 30px;
   background-color: rgba(245, 245, 220, 0);
-  width: 9,7rem;
-  max-width: 9,7rem;
-  height: 4,5rem;
-  max-height: 4,5rem;
+  width: 9, 7rem;
+  max-width: 9, 7rem;
+  height: 4, 5rem;
+  max-height: 4, 5rem;
 
-  display:inline-block;
+  display: inline-block;
 }
 
-
-.issuerContainer{
+.issuerContainer {
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -87,24 +88,23 @@
   align-items: center;
 }
 
-.issuerForm{
+.issuerForm {
   margin: 2rem;
   padding: 1.2rem;
   border-radius: 30px;
   min-width: 30rem;
   border: solid;
-  background-color: rgb(212, 182, 72);
   display: flex;
   flex-direction: column;
 }
 
-.issuerForm button{
+.issuerForm button {
   margin: 0.5rem;
   height: 3rem;
   max-height: 3rem;
 }
 
-.formLabel{
+.formLabel {
   margin: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -112,19 +112,17 @@
   align-items: center;
 }
 
-
-.issuerFormContainer{
+.issuerFormContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .modalBackground {
   width: 100vw;
   height: 150vh;
-  background-color:  rgb(250, 218, 111);
+  background-color: rgb(250, 218, 111);
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -145,38 +143,35 @@
   min-width: 30rem;
   border: solid;
   background-color: rgb(212, 182, 72);
-
 }
 
-.modalContainer h4{
- margin: 0.2rem;
+.modalContainer h4 {
+  margin: 0.2rem;
 }
-.modalContainer h3{
+.modalContainer h3 {
   margin: 1rem;
- }
+}
 
- .modalContainer input{
+.modalContainer input {
   margin: 1rem;
   width: 380px;
- }
+}
 
- .issueStep{
+.issueStep {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
- }
+}
 
- .issueStep{
+.issueStep {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
- }
+}
 
-
-
- @keyframes spinner {
+@keyframes spinner {
   0% {
     transform: rotate(0deg);
   }
@@ -200,7 +195,7 @@
   margin-left: 1rem;
 }
 
-.userSelection{
+.userSelection {
   margin: 1rem;
   display: flex;
   flex-direction: row;
@@ -208,12 +203,12 @@
   align-items: center;
 }
 
-.userSelection button{
+.userSelection button {
   margin-left: 1rem;
   margin-right: 1rem;
 }
 
-.credNumberIn{
+.credNumberIn {
   margin: 0.3rem;
   display: flex;
   flex-direction: row;
@@ -221,13 +216,14 @@
   align-items: center;
 }
 
-.credNumberIn input{
+.credNumberIn input {
   margin-left: 0.3rem;
 }
-.credNumberIn p{
+.credNumberIn p {
   margin: 0.3rem;
 }
 
-.verifyButton{
+.verifyButton {
   margin: 1rem;
 }
+

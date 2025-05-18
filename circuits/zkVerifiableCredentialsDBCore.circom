@@ -62,4 +62,4 @@ template zkVerifiableCredentialsDBCore(depth, claimsN){
 }
 
 //set tree depth and credential claims number
-component main {public [MerkleProofRoot,EthAddress,DisclosureVector]} = zkVerifiableCredentialsDBCore(16, 5);
+component main {public [MerkleProofRoot,EthAddress,DisclosureVector]} = zkVerifiableCredentialsDBCore(16, 7);

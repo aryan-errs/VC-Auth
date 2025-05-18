@@ -12,7 +12,7 @@ import UserVerify from "./components/userverify";
 
 const Home: NextPage = () => {
   //Contracts Constats
-  const CREDENTIALS_DB_ADDRESS = "0x35CecafF2679f334Fc4ECAbba38EB6e1b499aC49";
+  const CREDENTIALS_DB_ADDRESS = "0xDA7411b67b4f020928818f81E27366F62f4D7522";
 
   //wallet connection
   const [walletAddress, setWalletAddress] = useState("");

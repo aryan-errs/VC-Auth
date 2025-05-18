@@ -5,7 +5,7 @@ import "@nomiclabs/hardhat-ethers";
 const HARMONY_PRIVATE_KEY =
   "0d065b1a5dc3f5e336f20b51e7c0cca40bcffe17b64d9e01a0fa0a2188d1904a"; //Example Harmony Devnet privkey
 const SEPOLIA_PK =
-  "5fe25b7e476be83cf435bff712aab56c4a802e9ff7cb3a78bc48f98b84387977";
+  "566dc65ca94cc3e69bf6a0170be2f94752dace6c724b4050bdcdcddc3f8c948c";
 const config: HardhatUserConfig = {
   solidity: "0.8.9",
   networks: {
