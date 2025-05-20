@@ -11,10 +11,8 @@ import UserProof from "./components/userproof";
 import UserVerify from "./components/userverify";
 
 const Home: NextPage = () => {
-  //Contracts Constats
   const CREDENTIALS_DB_ADDRESS = "0xDA7411b67b4f020928818f81E27366F62f4D7522";
 
-  //wallet connection
   const [walletAddress, setWalletAddress] = useState("");
   const [walletPublicKey, setWalletPublicKey] = useState("");
   const [provider, setProvider] = useState<Web3Provider | undefined>(undefined);
@@ -26,7 +24,6 @@ const Home: NextPage = () => {
   const [walletCon, setWalletCon] = useState(false);
   const [userSelection, setUserSelection] = useState("default");
 
-  //Request account to MM
   async function requestAccount() {
     if (window.ethereum) {
       try {
@@ -42,7 +39,6 @@ const Home: NextPage = () => {
     }
   }
 
-  //Connect account to app
   async function connectAccount() {
     if (typeof window.ethereum !== "undefined") {
       await requestAccount();
@@ -53,13 +49,11 @@ const Home: NextPage = () => {
 
       await setSigner(signer);
       if (provider) {
-        //get contract object
         const abi = new ethers.utils.Interface(CREDENTIAL_DB_ARTIFACT.abi);
         console.log(abi);
         const creDB = new ethers.Contract(CREDENTIALS_DB_ADDRESS, abi, signer);
         await setCredentialsDB(creDB);
 
-        //check if is issuer wallet
         console.log(creDB);
 
         const owner = await creDB.owner();
@@ -75,17 +69,13 @@ const Home: NextPage = () => {
     }
   }
 
-  //get public key from MetaMask. this function do not goes here, goes in subject portal
   async function getPubKeyFromMM(walletAddress: string) {
     if (window.ethereum) {
       const keyB64 = (await window.ethereum.request!({
         method: "eth_getEncryptionPublicKey",
         params: [walletAddress],
       })) as string;
-      //if you want base 64 encoded
       return keyB64;
-      //if you want the decoded form bytes32 like
-      //return ethers.utils.base64.decode(keyB64)
     }
   }
 
@@ -96,13 +86,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={styles.header}>
-        <h3>VC Auth</h3>
+        <img src="college-logo.jpeg" width={55} />
+        <h3>Authentication System</h3>
         <div>
           {walletAddress == "" ? (
-            <button
-              className={styles.conButton}
-              onClick={() => connectAccount()}
-            >
+            <button className={styles.btn} onClick={() => connectAccount()}>
               {" "}
               <div>Connect Wallet</div>
             </button>
@@ -145,8 +133,9 @@ const Home: NextPage = () => {
                   default: (
                     <div className={styles.main}>
                       <h1>What you want to do?</h1>
-                      <div className={styles.userSelection}>
+                      <div>
                         <button
+                          className={styles.btn}
                           onClick={() => {
                             setUserSelection("proove");
                           }}
@@ -154,6 +143,7 @@ const Home: NextPage = () => {
                           Prove your credential
                         </button>
                         <button
+                          className={styles.btn}
                           onClick={() => {
                             setUserSelection("verify");
                           }}
@@ -161,6 +151,7 @@ const Home: NextPage = () => {
                           Verify a proof
                         </button>
                         <button
+                          className={styles.btn}
                           onClick={async () => {
                             setUserSelection("getPubAdd");
                             const pubKey = await getPubKeyFromMM(walletAddress);

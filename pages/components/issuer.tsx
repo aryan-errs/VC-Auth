@@ -1,20 +1,16 @@
 import React, { Component, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import { Contract, ethers, Signer } from "ethers";
-import { decrypt, encrypt } from "@metamask/eth-sig-util";
-import { isGeneratorFunction } from "util/types";
+import { encrypt } from "@metamask/eth-sig-util";
 import { poseidon } from "circomlibjs";
 
-//Read credentials counter
 async function readCredentialsCounter(contract: Contract | undefined) {
   if (contract) {
-    //get claims array from schema
     const credentialsCounter = await contract.credentialsCounter();
     return credentialsCounter;
   }
 }
 
-//read claims array from contract
 async function readSchemaClaims(contract: Contract | undefined) {
   if (contract) {
     //get claims array from schema
@@ -26,7 +22,6 @@ async function readSchemaClaims(contract: Contract | undefined) {
   }
 }
 
-//asymetric encrytion with MetaMask
 function encryptWithMM(
   publicKey: string,
   credential: { claims: { [x: string]: string } }
@@ -40,7 +35,6 @@ function encryptWithMM(
   return JSON.stringify(enc);
 }
 
-//upload encypted data to contract.
 async function uploadEncryptedCredentialAndLeafToContract(
   encCredential: string,
   contract: Contract | undefined,
@@ -56,7 +50,6 @@ async function uploadEncryptedCredentialAndLeafToContract(
   }
 }
 
-//convert ascii to hex
 function ascii_to_hex(str: string) {
   var arr1 = ["0x"];
   for (var n = 0, l = str.length; n < l; n++) {
@@ -66,7 +59,6 @@ function ascii_to_hex(str: string) {
   return arr1.join("");
 }
 
-//compute merkle leaf from Credential
 function computeLeaf(
   credentialJSON: { claims: { [x: string]: string } },
   claimsArray: [string] | undefined
@@ -74,7 +66,6 @@ function computeLeaf(
   if (credentialJSON.claims.ethAddress) {
     if (claimsArray) {
       const ethAddress = credentialJSON.claims.ethAddress;
-      //claim values are type string, has to be converted to ascii bytes like(Address is not converted)
       let convertedArrayHex: string[] = [];
 
       for (let i in claimsArray) {
@@ -87,7 +78,6 @@ function computeLeaf(
         }
       }
 
-      //compute CredentialHash
       // @ts-ignore
       var hashDigest = poseidon([convertedArrayHex[0], convertedArrayHex[1]]);
       if (claimsArray.length > 2) {
@@ -95,7 +85,6 @@ function computeLeaf(
           hashDigest = poseidon([hashDigest, convertedArrayHex[i]]);
         }
       }
-      //hash CredentialHash and ethAddress
       const leaf = poseidon([hashDigest, ethAddress]);
       return leaf;
     }
@@ -129,8 +118,8 @@ export default class Issuer extends Component<
         {/*ISSUER FORM*/}
         {this.state === null || this.state.claimsArray === undefined ? (
           <button
+            className={styles.btn}
             onClick={async () => {
-              /*READ CREDENTIALS SCHEMA FROM CONTRACT*/
               const claimsArray = await readSchemaClaims(
                 this.props.credentialsDB
               );
@@ -153,46 +142,46 @@ export default class Issuer extends Component<
             <form
               className={styles.issuerForm}
               onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-                /* ON FORM SUBMIT */
                 event.preventDefault();
                 this.setState((state) => ({ enIssueModal: true }));
               }}
             >
-              {this.state.claimsArray.map((val, i) => {
-                return (
-                  <label key={val} className={styles.formLabel}>
-                    <div>{val}:</div>
-                    <input
-                      name={val}
-                      onChange={(
-                        event: React.ChangeEvent<HTMLInputElement>
-                      ) => {
-                        /*ON FORM INPUT CHANGE*/
-                        const name = event.target.name;
-                        const value = event.target.value;
-                        if (this.state.credentialJSON === undefined) {
-                          const newCredentialJSON = {
-                            claims: { [name]: value },
-                          };
-                          this.setState((state) => ({
-                            credentialJSON: newCredentialJSON,
-                          }));
-                        } else {
-                          const newCredentialJSON = this.state.credentialJSON;
-                          newCredentialJSON.claims[name] = value;
-                          this.setState((state) => ({
-                            credentialJSON: newCredentialJSON,
-                          }));
-                        }
-                      }}
-                    />
-                  </label>
-                );
-              })}
+              <div>
+                {this.state.claimsArray.map((val, i) => {
+                  return (
+                    <label key={val} className={styles.formLabel}>
+                      <div>{val.toUpperCase()} :</div>
+                      <input
+                        name={val}
+                        required={true}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
+                          const name = event.target.name;
+                          const value = event.target.value;
+                          if (this.state.credentialJSON === undefined) {
+                            const newCredentialJSON = {
+                              claims: { [name]: value },
+                            };
+                            this.setState((state) => ({
+                              credentialJSON: newCredentialJSON,
+                            }));
+                          } else {
+                            const newCredentialJSON = this.state.credentialJSON;
+                            newCredentialJSON.claims[name] = value;
+                            this.setState((state) => ({
+                              credentialJSON: newCredentialJSON,
+                            }));
+                          }
+                        }}
+                      />
+                    </label>
+                  );
+                })}
+              </div>
               <button type="submit">Issue </button>
             </form>
 
-            {/*ISSUE SUBMISSION POP UP*/}
             {this.state.enIssueModal ? (
               <div className={styles.modalBackground}>
                 <div className={styles.modalContainer}>
@@ -222,8 +211,8 @@ export default class Issuer extends Component<
                     }}
                   />
                   <button
+                    className={styles.btn}
                     onClick={async () => {
-                      //CredentialIssued event catch
                       if (this.props.credentialsDB) {
                         this.props.credentialsDB.on(
                           "CredentialSavedInRegister",
@@ -246,18 +235,13 @@ export default class Issuer extends Component<
                         );
                       }
 
-                      {
-                        /*Credential issuance process*/
-                      }
                       this.setState((state) => ({ issuancePocInit: true }));
-                      //credential encryption
                       const enc = encryptWithMM(
                         this.state.subjectEthPubKey,
                         this.state.credentialJSON
                       );
                       this.setState((state) => ({ step1flag: true }));
 
-                      //compute Merkle Tree leaf
                       const leaf = computeLeaf(
                         this.state.credentialJSON,
                         this.state.claimsArray
@@ -268,7 +252,6 @@ export default class Issuer extends Component<
                         ethers.BigNumber.from(leaf);
                       print = print.toHexString();
 
-                      //Encrypted credential and leaf upload to contract
                       await uploadEncryptedCredentialAndLeafToContract(
                         enc,
                         this.props.credentialsDB,

@@ -1,18 +1,11 @@
 import React, { Component, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import { Contract, ethers, Signer } from "ethers";
-import { decrypt, encrypt } from "@metamask/eth-sig-util";
-import { isGeneratorFunction } from "util/types";
-import { poseidon } from "circomlibjs";
-import { throws } from "assert";
 import VERIFIER_ARTIFACT from "../../artifacts/contracts/zkVerifiableCredentialsDBCoreVerifier.sol/Verifier.json";
-import UserProof from "./userproof";
 const groth16 = require("snarkjs").groth16;
 
-//read claims array from contract
 async function readSchemaClaims(contract: Contract | undefined) {
   if (contract) {
-    //get claims array from schema
     const readCredentialsSchema = await contract.credentialsSchema();
     const readCredentialsSchemaJSON = JSON.parse(readCredentialsSchema);
     const claimsArray = readCredentialsSchemaJSON.schema_json.claims;
@@ -33,7 +26,6 @@ async function verifyProof(
 
   const argv = calldata.replace(/[[\]"\s]/g, "").split(",");
 
-  // Building R1CS vectors
   const a = [argv[0], argv[1]];
   const b = [
     [argv[2], argv[3]],
@@ -41,18 +33,14 @@ async function verifyProof(
   ];
   const c = [argv[6], argv[7]];
 
-  // Computation result
   const Input = argv.slice(8);
 
-  //connect account to verifier contract
   let verifier: Contract | undefined;
   if (credentialsDB) {
     const verifierAddress = credentialsDB.verifier();
-    //get contract object
     const abi = new ethers.utils.Interface(VERIFIER_ARTIFACT.abi);
     verifier = new ethers.Contract(verifierAddress, abi, signer);
 
-    // Sends the poof to verifier smart contract to evalate it
     let result = await verifier.verifyProof(a, b, c, Input);
     result = true;
     return { result, Input };
@@ -90,16 +78,14 @@ export default class UserVerify extends Component<
           }}
         ></textarea>
         <button
-          className={styles.verifyButton}
+          className={styles.btn}
           onClick={async () => {
             const res = await verifyProof(
               this.state.proofPack,
               this.props.credentialsDB,
               this.props.signer
             );
-            console.log(res?.result);
 
-            //Get Claims in string char
             const claimsArray = await readSchemaClaims(
               this.props.credentialsDB
             );
@@ -121,18 +107,15 @@ export default class UserVerify extends Component<
               }
             }
 
-            //Get merkle root from res.Input
             const proofRoot = ethers.BigNumber.from(
               res?.Input[claimsArray.length]
             );
 
-            //Get merkle root from contract
             var contractRoot: any;
             if (this.props.credentialsDB) {
               contractRoot = await this.props.credentialsDB.getMerkleRoot();
             }
 
-            //Get Address from res.Input
             var credentialSubjectAddress =
               res?.Input[claimsArray.length + 1].slice(2);
             credentialSubjectAddress = credentialSubjectAddress.replace(
@@ -141,7 +124,6 @@ export default class UserVerify extends Component<
             );
             credentialSubjectAddress = "0x" + credentialSubjectAddress;
 
-            //Get Disclosure vector from res.Input
             var disclosureVector: any = [];
 
             for (
@@ -161,8 +143,6 @@ export default class UserVerify extends Component<
               var val = res?.Input[i].slice(2);
             }
 
-            console.log(disclosureVector);
-
             if (res && res.result === true) {
               this.setState((state) => ({
                 proofSuccess: true,
@@ -173,8 +153,6 @@ export default class UserVerify extends Component<
                 disclosureVector: disclosureVector,
               }));
             }
-
-            console.log(this.state, res);
           }}
         >
           Verify Proof
