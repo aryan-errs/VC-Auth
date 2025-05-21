@@ -85,6 +85,13 @@
   display: inline-block;
 }
 
+.recoveredDataDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .issuerContainer {
   margin: 1rem;
   display: flex;
@@ -325,11 +332,22 @@
   margin-right: 1rem;
 }
 
-.credNumberIn {
+.recoverInput {
   margin: 0.3rem;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.recoverInput > input {
+  width: 15vw;
+}
+
+.credNumberIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 25vw;
 }
 
 .issuerForm label {

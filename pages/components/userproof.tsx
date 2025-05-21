@@ -130,7 +130,7 @@ export default class UserProof extends Component<
       <div className={styles.issuerContainer}>
         <h2>Recover your credential</h2>
         <h4>Hint: use your credential number to recover your data.</h4>
-        <div className={styles.credNumberIn}>
+        <div className={styles.recoverInput}>
           <input
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const val = Number.parseInt(event.target.value);
@@ -180,24 +180,31 @@ export default class UserProof extends Component<
               })}
             </ul>
             <h3>Selective disclosure selection</h3>
-            {this.state.claimsArray.map((claimNames, index) => {
-              return (
-                <div key={claimNames} className={styles.credNumberIn}>
-                  <p>{claimNames}</p>{" "}
-                  <input
-                    type="checkbox"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      let newDisclosureVector = this.state.disclosureVector;
-                      newDisclosureVector[index] = event.target.checked ? 1 : 0;
-                      this.setState((state) => ({
-                        disclosureVector: newDisclosureVector,
-                      }));
-                    }}
-                  />
-                </div>
-              );
-            })}
+            <div className={styles.recoveredDataDiv}>
+              {this.state.claimsArray.map((claimNames, index) => {
+                return (
+                  <div key={claimNames} className={styles.credNumberIn}>
+                    <p>{claimNames.toUpperCase()}</p>{" "}
+                    <input
+                      type="checkbox"
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        let newDisclosureVector = this.state.disclosureVector;
+                        newDisclosureVector[index] = event.target.checked
+                          ? 1
+                          : 0;
+                        this.setState((state) => ({
+                          disclosureVector: newDisclosureVector,
+                        }));
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
             <button
+              className={styles.btn}
               onClick={async () => {
                 const merkleProof = await generateMerkleProof(
                   this.props.credentialsDB,
