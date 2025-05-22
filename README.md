@@ -1,5 +1,3 @@
-# zk-Verifiable-Credentials-DB
-
 A credentials database encrypted and stored on chain with zk mechanics.
 
 This tool allows to an issuer to create a database to store credentials issued over subjects, and have these credentials always accessible and
