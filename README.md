@@ -1,14 +1,3 @@
-A credentials database encrypted and stored on chain with zk mechanics.
-
-This tool allows to an issuer to create a database to store credentials issued over subjects, and have these credentials always accessible and
-untampered thanks to immutable proprieties of the blockchain. Also, a zk verification is implemented to allow the subjects to prove their credentials with selective disclosure of inner claims. This project assumes that subjects are in possession of an eth EOA used as a Self-sovereign identity ID.
-
-### Use Cases
-
-- Zero knowledge membership proof.
-- Persistent credentials registers.
-- Zero knowledge selective disclosure of the claims inside of a credential.
-
 ### System Players
 
 - Issuer: it is the account which owns the contract and can issue new credentials.
