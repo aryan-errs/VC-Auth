@@ -26,9 +26,7 @@
 
 Navigate to your project directory and run:
 
-    ```
     yarn install
-    ```
 
 5. Install Rust and Cargo
 
@@ -39,10 +37,12 @@ Navigate to your project directory and run:
 
 6. Build and Install circom
 
+   ```
    git clone <https://github.com/iden3/circom.git>
    cd circom
    cargo build --release
    cargo install --path circom
+   ```
 
 🧩 System Players
 
