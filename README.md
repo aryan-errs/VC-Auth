@@ -4,35 +4,35 @@
 
 1. Install nvm (Node Version Manager)
 
-curl -o- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh> | bash
-source ~/.nvm/nvm.sh
+   curl -o- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh> | bash
+   source ~/.nvm/nvm.sh
 
 2. Install and Use Node.js v16
 
-nvm install 16
-nvm use 16
+   nvm install 16
+   nvm use 16
 
 3. Install yarn
 
-npm install -g yarn
+   npm install -g yarn
 
 4. Install Project Dependencies
 
 Navigate to your project directory and run:
 
-yarn install
+    yarn install
 
 5. Install Rust and Cargo
 
-curl <https://sh.rustup.rs> -sSf | sh
-source $HOME/.cargo/env
+   curl <https://sh.rustup.rs> -sSf | sh
+   source $HOME/.cargo/env
 
 6. Build and Install circom
 
-git clone <https://github.com/iden3/circom.git>
-cd circom
-cargo build --release
-cargo install --path circom
+   git clone <https://github.com/iden3/circom.git>
+   cd circom
+   cargo build --release
+   cargo install --path circom
 
 🧩 System Players
 
@@ -75,13 +75,13 @@ Contracts
 
 Modify the file:
 
-credentials-src/examplecredentialschema.json
+    credentials-src/examplecredentialschema.json
 
 This JSON defines the structure of claims for a credential set. 2. Update the Circuit Parameters
 
 Edit:
 
-circuits/zkVerifiableCredentialsDBCore.circom
+    circuits/zkVerifiableCredentialsDBCore.circom
 
 Set:
 
@@ -95,18 +95,18 @@ Update TREE_DEPTH in CredentialsDB.sol to match the depth used in the circuit. 4
 
 Use:
 
-yarn compilecircuit
+    yarn compilecircuit
 
 Or:
 
-bash scripts/compile-circuit.sh
+    bash scripts/compile-circuit.sh
 
     Modify this script to select the appropriate ptau file based on circuit constraints:
     Check available ptau files
 
 5. Bump Solidity Verifier
 
-yarn bumpsolidityverifier
+   yarn bumpsolidityverifier
 
 # or
 
@@ -116,16 +116,16 @@ node scripts/compile-circuit.sh
 
 Use:
 
-yarn deploysepolia
+    yarn deploysepolia
 
 To deploy on Hardhat local network.
 To use a custom network, configure it in hardhat.config.ts and run:
 
-npx hardhat run --network <network-name> scripts/deploy.ts
+    npx hardhat run --network <network-name> scripts/deploy.ts
 
 7. Run the Frontend
 
-yarn run dev
+   yarn run dev
 
 📚 Resources
 
