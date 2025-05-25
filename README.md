@@ -4,28 +4,38 @@
 
 1. Install nvm (Node Version Manager)
 
+   ```
    curl -o- <https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh> | bash
    source ~/.nvm/nvm.sh
+   ```
 
 2. Install and Use Node.js v16
 
+   ```
    nvm install 16
    nvm use 16
+   ```
 
 3. Install yarn
 
+   ```
    npm install -g yarn
+   ```
 
 4. Install Project Dependencies
 
 Navigate to your project directory and run:
 
+    ```
     yarn install
+    ```
 
 5. Install Rust and Cargo
 
+   ```
    curl <https://sh.rustup.rs> -sSf | sh
    source $HOME/.cargo/env
+   ```
 
 6. Build and Install circom
 
@@ -106,11 +116,9 @@ Or:
 
 5. Bump Solidity Verifier
 
+   ```
    yarn bumpsolidityverifier
-
-# or
-
-node scripts/compile-circuit.sh
+   ```
 
 6. Deploy Smart Contracts
 
@@ -125,7 +133,9 @@ To use a custom network, configure it in hardhat.config.ts and run:
 
 7. Run the Frontend
 
+   ```
    yarn run dev
+   ```
 
 📚 Resources
 
